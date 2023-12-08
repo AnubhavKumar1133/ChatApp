@@ -37,8 +37,6 @@ class MainActivity : AppCompatActivity() {
                 userList.clear()
                 for(postSnapshot in snapshot.children){
                     val currentUser = postSnapshot.getValue(User::class.java)
-                    Log.d("mauth", mAuth.currentUser?.uid.toString())
-                    Log.d("mauth", currentUser?.uid.toString())
 
                     if(mAuth.currentUser?.uid != currentUser?.uid){
                         userList.add(currentUser!!)

@@ -22,6 +22,7 @@ class UserAdapter(val context: Context, val userList: ArrayList<User>): Recycler
             val intent = Intent(context, ChatActivity::class.java)
             intent.putExtra("name", currentUser.name.toString())
             intent.putExtra("uid", currentUser.uid.toString())
+            intent.putExtra("lan",currentUser.language.toString())
             context.startActivity(intent)
         }
     }

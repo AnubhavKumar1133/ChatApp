@@ -50,11 +50,23 @@ class MessageAdapter(val context: Context, val messageList: ArrayList<Message>):
             // do stuff for receive view holder
             val viewHolder = holder as ReceiveViewHolder
 //            holder.receiveMessage.text = currentMessage.message
-
-            val options = TranslatorOptions.Builder()
-                .setSourceLanguage(TranslateLanguage.ENGLISH)
-                .setTargetLanguage(TranslateLanguage.HINDI)
+            var options = TranslatorOptions.Builder()
+                .setSourceLanguage(TranslateLanguage.HINDI)
+                .setTargetLanguage(TranslateLanguage.ENGLISH)
                 .build()
+            if (currentMessage.language.equals("HINDI")){
+
+            options = TranslatorOptions.Builder()
+                .setSourceLanguage(TranslateLanguage.HINDI)
+                .setTargetLanguage(TranslateLanguage.ENGLISH)
+                .build()
+            }
+            else{
+                options = TranslatorOptions.Builder()
+                    .setSourceLanguage(TranslateLanguage.ENGLISH)
+                    .setTargetLanguage(TranslateLanguage.HINDI)
+                    .build()
+            }
 
             val englishHindiTranslator = Translation.getClient(options)
 //            getLifecycle().addObserver(englishHindiTranslator)
