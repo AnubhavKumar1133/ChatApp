@@ -31,7 +31,6 @@ class ChatActivity : AppCompatActivity() {
         val intent = intent
         val name = intent.getStringExtra("name")
         val receiverUid = intent.getStringExtra("uid")
-        Log.d("UID",name.toString())
 
         val senderUid = FirebaseAuth.getInstance().currentUser?.uid
         mDbRef = FirebaseDatabase.getInstance().getReference()
@@ -53,6 +52,9 @@ class ChatActivity : AppCompatActivity() {
 
                 for(postSnapshot in snapshot.children){
                     val message = postSnapshot.getValue(Message::class.java)
+                    if (message != null) {
+                        message.language=intent.getStringExtra("lan").toString()
+                    }
                     messageList.add(message!!)
                 }
                 messageAdapter.notifyDataSetChanged()

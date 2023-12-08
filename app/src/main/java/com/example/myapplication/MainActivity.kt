@@ -1,5 +1,4 @@
 package com.example.myapplication
-
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -32,39 +31,22 @@ class MainActivity : AppCompatActivity() {
         userRecyclerView.layoutManager = LinearLayoutManager(this)
         userRecyclerView.adapter = adapter
 
-        mDbRef.child("user").addValueEventListener(object: ValueEventListener{
+        mDbRef.child("user").addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 userList.clear()
-                for(postSnapshot in snapshot.children){
+                for (postSnapshot in snapshot.children) {
                     val currentUser = postSnapshot.getValue(User::class.java)
-                    Log.d("mauth", mAuth.currentUser?.uid.toString())
-                    Log.d("mauth", currentUser?.uid.toString())
 
-                    if(mAuth.currentUser?.uid != currentUser?.uid){
+                    if (mAuth.currentUser?.uid != currentUser?.uid) {
                         userList.add(currentUser!!)
                     }
-                    }
+                }
                 adapter.notifyDataSetChanged()
             }
 
             override fun onCancelled(error: DatabaseError) {
 
             }
-    })
-        fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu, menu)
-        return super.onCreateOptionsMenu(menu)
+        })
     }
-
-    fun onOptionsItemSelected(item: MenuItem): Boolean {
-
-        if(item.itemId == R.id.logout){
-            mAuth.signOut()
-            val intent = Intent(this@MainActivity, Login::class.java)
-            finish()
-            startActivity(intent)
-            return true
-        }
-        return true
-    }}
 }

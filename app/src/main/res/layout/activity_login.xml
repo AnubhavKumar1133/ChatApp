@@ -14,14 +14,22 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="100dp"
         android:src="@drawable/logo" />
+    <ImageView
+        android:id="@+id/app_logotext"
+        android:layout_width="155dp"
+        android:layout_height="46dp"
+        android:layout_below="@+id/app_logo"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/textlogo" />
 
     <EditText
         android:id="@+id/edt_email"
-        android:layout_width="377dp"
-        android:layout_height="55dp"
+        android:layout_width="369dp"
+        android:layout_height="57dp"
         android:layout_below="@id/app_logo"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="68dp"
         android:layout_marginRight="20dp"
         android:layout_marginBottom="0dp"
         android:background="@drawable/edt_background"

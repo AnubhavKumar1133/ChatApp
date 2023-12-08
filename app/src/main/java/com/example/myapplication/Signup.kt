@@ -14,6 +14,8 @@ class Signup : AppCompatActivity() {
     private lateinit var edtName: EditText
     private lateinit var edtEmail: EditText
     private lateinit var edtPassword: EditText
+    private lateinit var edtLanguage: EditText
+
     private lateinit var btnSignup: Button
     private lateinit var mAuth: FirebaseAuth
     private lateinit var mDbRef: DatabaseReference
@@ -28,23 +30,24 @@ class Signup : AppCompatActivity() {
         edtEmail = findViewById(R.id.edt_email)
         edtPassword = findViewById(R.id.edt_password)
         edtName = findViewById(R.id.edt_name)
+        edtLanguage=findViewById(R.id.edt_language)
         btnSignup = findViewById(R.id.btnSignup)
         btnSignup.setOnClickListener{
             val name = edtName.text.toString()
             val email = edtEmail.text.toString()
             val password = edtPassword.text.toString()
-
-            signup(email, password, name)
+            val language=edtLanguage.text.toString()
+            signup(email, password, name,language)
         }
     }
 
-    private fun signup(email:String, password:String, name: String){
+    private fun signup(email: String, password: String, name: String, language: String){
         //logic for creating user
         mAuth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     //code for jumping to home
-                    addUserToDatabase(name, email, mAuth.currentUser?.uid!!)
+                    addUserToDatabase(name, email, mAuth.currentUser?.uid!!,language)
                     val intent = Intent(this@Signup, MainActivity::class.java)
                     finish()
                     startActivity(intent)
@@ -54,9 +57,9 @@ class Signup : AppCompatActivity() {
             }
         }
 
-    private fun addUserToDatabase(name: String, email: String, uid: String){
+    private fun addUserToDatabase(name: String, email: String, uid: String,language: String){
         mDbRef = FirebaseDatabase.getInstance().reference
-        mDbRef.child("user").child(uid).setValue(User(name, email, uid))
+        mDbRef.child("user").child(uid).setValue(User(name, email, uid,language))
     }
 
 }
