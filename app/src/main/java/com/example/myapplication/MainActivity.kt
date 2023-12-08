@@ -3,6 +3,7 @@ package com.example.myapplication
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -36,11 +37,13 @@ class MainActivity : AppCompatActivity() {
                 userList.clear()
                 for(postSnapshot in snapshot.children){
                     val currentUser = postSnapshot.getValue(User::class.java)
+                    Log.d("mauth", mAuth.currentUser?.uid.toString())
+                    Log.d("mauth", currentUser?.uid.toString())
+
                     if(mAuth.currentUser?.uid != currentUser?.uid){
                         userList.add(currentUser!!)
                     }
-                    userList.add(currentUser!!)
-                }
+                    }
                 adapter.notifyDataSetChanged()
             }
 
